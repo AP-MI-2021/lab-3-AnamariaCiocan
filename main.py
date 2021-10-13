@@ -2,7 +2,8 @@ def show_menu():
     print('1. Citire lista')
     print('2. Determinare cea mai lunga subsecventa cu proprietatea 6')
     print('3. Determinare cea mai lunga subsecventa cu proprietatea 18')
-    print('4. Iesire')
+    print('4. Determinare cea mai lunga subsecventa cu proprietatea 5')
+    print('5. Iesire')
 
 def read_list():
     lst=[]
@@ -75,6 +76,52 @@ def test_get_longest_digit_count_desc():
     assert get_longest_digit_count_desc([54, 32, 64, 61, 70]) == [54, 32, 64, 61, 70]
     assert get_longest_digit_count_desc([31, 24, 17, 63]) == [31]
 
+def is_palindrome(n):
+    '''
+    Verifica daca un numar este palindrom.
+    param: n-numar intreg
+    return: True/False daca indeplineste sau nu conditia de a fi palindrom.
+    '''
+    x=0
+    k=0
+    cn=n
+    while n>0:
+        k=n%10
+        x=x*10+k
+        n=n//10
+    if cn==x:
+        return True
+    else:
+        return False
+
+
+
+
+def get_longest_all_palindromes(lst: list[int]) -> list[int]:
+    '''
+    Determina cea mai lunga subsecventa in care toate numerele sunt palindroame.
+    param: list-lista de numere
+    return: o lista cu subsecventa ceruta
+    '''
+    n=len(lst)
+    result=[]
+    for i in range (n):
+        for j in range (i,n):
+            all_palindrome=True
+            for num in lst[i:j+1]:
+                if is_palindrome(num)==0:
+                    all_palindrome=False
+                    break
+            if all_palindrome:
+                if j-i+1>len(result):
+                    result = lst[i:j+1]
+    return result
+
+def test_get_longest_all_palindromes():
+    assert get_longest_all_palindromes([121, 233, 151, 62326, 777]) == [151, 62326, 777]
+    assert get_longest_all_palindromes([11, 23, 15, 89]) == [11]
+    assert get_longest_all_palindromes([123, 242, 2789]) == [242]
+    assert get_longest_all_palindromes([2424, 2442, 888, 9339]) == [2442, 888, 9339]
 
 def main():
     lst=[]
@@ -87,8 +134,10 @@ def main():
              k=int(input('Alegeti un numar k pentru a verifica proprietatea 6: '))
              print('Cea mai lunga subsecventa cu proprietatea ca toate numerele sunt divizibile cu k este: ', get_longest_div_k(lst,k))
         elif opt == '3':
-           print('Cea mai lunga subsecventa cu proprietatea ca toate numerele au nr. de cifre in ordine descrescastoare este: ', get_longest_digit_count_desc(lst))
+             print('Cea mai lunga subsecventa cu proprietatea ca toate numerele au nr. de cifre in ordine descrescastoare este: ', get_longest_digit_count_desc(lst))
         elif opt == '4':
+             print('Cea mai lunga subsecventa in care toate numerele sunt palindroame este: ', get_longest_all_palindromes(lst))
+        elif opt == '5':
               break
         else:
               print('Optiune invalida.')
