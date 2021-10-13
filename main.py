@@ -33,10 +33,10 @@ def get_longest_div_k(lst: list[int], k:int) -> list[int]:
                     result = lst[st:dr+1]
     return result
 def test_get_longest_div_k():
-    assert get_longest_div_k([5, 6, 3, 8], 2) == [6, 8]
+    assert get_longest_div_k([5, 6, 3, 8], 2) == [6]
     assert get_longest_div_k([3, 6, 9, 11], 3) == [3, 6, 9]
     assert get_longest_div_k([5, 11, 24], 6) == [24]
-    assert get_longest_div_k([88, 77, 44, 7], 7) == [77, 7]
+    assert get_longest_div_k([88, 77, 44, 7], 7) == [77]
 
 def desc(n):
     '''
@@ -144,4 +144,7 @@ def main():
 
 
 if __name__ == '__main__':
+    test_get_longest_div_k()
+    test_get_longest_digit_count_desc()
+    test_get_longest_all_palindromes()
     main()
